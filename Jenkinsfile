@@ -2,20 +2,21 @@ pipeline{
     agent any
 
     stages{
-        stage("A"){
+        stage("sonar quality check"){
+            agent{
+                docker{
+                    image'openjdk:11'
+                }
+            }
             steps{
-                echo "========executing A========"
+                script {
+                   withSonarQubeEnv(credentialsId: 'sonarpasswd') {
+                    sh 'chmod +x gradlew'
+                    sh './gradlew sonarqube'
+}
+                }
             }
             
-    post{
-        always{
-            echo "========always========"
-        }
-        success{
-            echo "========pipeline executed successfully ========"
-        }
-        failure{
-            echo "========pipeline execution failed========"
         }
     }
 }
