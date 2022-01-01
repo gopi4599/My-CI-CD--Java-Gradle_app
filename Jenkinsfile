@@ -10,13 +10,13 @@ agent any
                     image 'openjdk:11'
                 }
             }
-        }
+        
             steps{
                 script{
                     withSonarQubeEnv(credentialsId: 'sonarpasswd') {
                             sh 'chmod +x gradlew'
                             sh './gradlew sonarqube'
-                            
+                       }
                     }
                 }
             }
