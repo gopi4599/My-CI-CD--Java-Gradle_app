@@ -13,7 +13,8 @@ agent any
         
             steps{
                 script{
-                    withSonarQubeEnv(credentialsId: 'sonarpasswd') {
+                  
+                      withSonarQubeEnv(credentialsId: 'sonarpasswd') {
                             sh 'chmod +x gradlew'
                             sh './gradlew sonarqube'
                        }
